@@ -3,6 +3,21 @@ import streamlit as st
 
 def index():
     st.title("BuscaVest Analytics")
+    st.image("./matriz-eisenhower.jpg")
+
+    st.write("""
+    ## Integrantes
+             
+    - Ágata Cecília
+    - Breno Saraiva
+    - Enzo Dorta
+    - Jorge Antonio
+    - Rodrigo Zanetti
+    - Vicente Venancio
+    - Vinicius Crozato
+             
+    Fatec São Caetano do Sul - 5º ano ADS AMS
+    """)
 
 pages = [
     st.Page(index, title="Início"),

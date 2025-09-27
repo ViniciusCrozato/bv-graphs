@@ -5,7 +5,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import random
 
-st.set_page_config(page_title="Alinhamento Produto vs Demanda", layout="wide")
+st.set_page_config(page_title="Alinhamento Produto vs Demanda")
 
 # ========= MOCK DATA =========
 np.random.seed(42)
@@ -114,3 +114,45 @@ ax.set_title("Chance de recomendar (1-10)")
 ax.set_xlabel("Nota")
 ax.set_ylabel("Quantidade")
 st.pyplot(fig)
+
+st.divider()
+
+st.write("""
+# Alinhamento entre produto e demanda do ensino superior
+
+Esse painel nos mostra como nosso produto foi recebido, o quanto conseguimos nos inserir no mercado e se coincidiu com as expectativas.
+
+## Cenários 
+
+Nas tabelas de feedback, temos 3 possíveis cenários, que ocorrem após o período de vestibulares.
+- Os usuários que voltam ao site, após finalizar as provas e usufruem ainda do produto.
+- Os usuários que não voltam para visitar o site, mas ainda mantêm algum vínculo.
+- Os usuários que não voltam ao site e não mantêm nenhum vínculo.
+
+_(O vínculo pode ser pela rede social ou pela assinatura do plano das rotas de estudos.)_
+
+## Método que utilizamos
+
+Estamos utilizando um formulário com perguntas estratégicas para avaliar a contribuição e o quanto conseguimos alcançar nosso objetivo com o usuário.
+
+_**Na maioria das perguntas, utilizamos listagem de respostas em texto, pois pode ter alguma informação ou algo importante a ser compartilhado.**_
+
+- 1ª Pergunta:   
+    - **Os simulados de redação e os temas apresentados se alinharam com o que houve no vestibular?**
+        - Utilizamos um histograma de 1 a 5, para saber o quão próximo e útil abordamos os assuntos: 1 = pouco alinhado, 5 = muito alinhado.
+        - Listagem de respostas.
+- 2ª Pergunta: 
+    - **Qual matéria teve mais dificuldade no vestibular?**
+        - Histograma das matérias presentes.
+        - Listagem de respostas.
+- 3ª Pergunta:
+    - **Qual formato de estudo mais contribuiu para o seu preparo? (simulados, videoaulas, podcasts, leituras, laboratórios de aprendizado)**
+        - Utilizamos o pie chart, com uma visualização mais simples, que nos demonstra qual método podemos melhorar e qual teve o melhor resultado.
+        - Listagem de respostas.
+- 4ª Pergunta:
+    - **Sua nota foi suficiente para o curso ou instituição que tinha em plano?**
+        - Pie chart, forma simples de visualizar a porcentagem de "SIM" e "NÃO".
+- 5ª Pergunta:
+    - **Qual a chance de você indicar as trilhas do BuscaVest para um amigo ou conhecido? (1-10)**
+        - Histograma de 1 a 10, para avaliação de nossos serviços.
+""")

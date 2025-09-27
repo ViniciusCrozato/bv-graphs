@@ -3,26 +3,24 @@ import pandas as pd
 import random
 from datetime import datetime, timedelta
 
-st.set_page_config(page_title="Uptime e Desempenho", layout="wide")
+st.set_page_config(page_title="Uptime e Desempenho")
 
 st.title("🖥️ Uptime e Desempenho de Servidores")
 
 # ================= Parte 1: Status Atual =================
 st.header("1. Status Atual dos Microserviços")
 
-microservicos = [f"Serviço {i}" for i in range(1, 11)]
-microserviços = [
+microservicos = [
     "Core API",
     "Trilhas API",
-    "Web Analytics Hooks",
-    "Data Pipelines Worker",
+    "Web Analytics",
+    "Data Pipelines",
     "DB sa-east-1a",
     "DB sa-east-1b",
     "Web Core",
     "Web Trilhas",
     "Autenticação",
-    "Parceirias
-    ",
+    "Parceirias",
 ]
 status = ["online"] * 10
 status[3] = "offline"  # um microserviço offline proposital
@@ -72,3 +70,15 @@ for i, dt in enumerate(downtime_events):
         st.markdown(f"**Serviço afetado:** {random.choice(microservicos)}")
         st.markdown(f"**Causa:** {random.choice(causas)}")
         st.markdown(f"**Repercussão:** {random.choice(repercussoes)}")
+
+st.divider()
+
+st.subheader("Detalhes")
+
+st.text("Usamos essa dashboard para monitorar a saúde de nossos serviços. Neste cenário, temos 10 implantações diferentes. Qualquer turbulência nas operações é catalogada e adicionada ao histórico de downtimes. Isso é útil para o time de operações para identificar que serviço pode estar causando falhas na interface do usuário e identificar problemas recorrentes")
+
+st.write("Os dados dessa visualização são atulizados a cada minuto. Cada serviço possui um endpoint `/health`, que retorna um simples status 200 para sucesso, garantindo que tudo está em ordem")
+
+st.text('Isso é similar ao que outras plataformas de tecnologia oferecem de forma aberta para seus usuários, como o GitHub:')
+
+st.image("./githubstatus.png")

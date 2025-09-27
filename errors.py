@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 import random
 
-st.set_page_config(page_title="Dashboard 2 - Taxa de Erro em Requisições", layout="wide")
+st.set_page_config(page_title="Dashboard 2 - Taxa de Erro em Requisições")
 
 # ========= MOCK DATA =========
 np.random.seed(42)
@@ -79,3 +79,7 @@ with tab2:
             for i, req in subset.iterrows():
                 with st.expander(f"📄 Contexto {req['contexto']} — Req {i}"):
                     st.json(req["request_body"])
+
+st.divider()
+st.subheader("Detalhes")
+st.text("\nEsta visualização tem como público alvo o time de operações, o qual, com a utilização da mesma, poderá fazer observações/análises precisas sobre erros ou requisições suspeitas às mais diversas rotas do nosso website.")

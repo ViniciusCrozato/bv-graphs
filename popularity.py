@@ -1,10 +1,12 @@
+
 import streamlit as st
+from pathlib import Path
 import pandas as pd
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-st.set_page_config(page_title="Cursos/IES/Vest mais buscados", layout="wide")
+st.set_page_config(page_title="Cursos/IES/Vest mais buscados")
 
 # ========= MOCK DATA =========
 np.random.seed(42)
@@ -93,3 +95,19 @@ ax.set_title("Vestibulares mais buscados")
 ax.set_xlabel("Quantidade de buscas")
 ax.set_ylabel("Vestibular")
 st.pyplot(fig)
+
+st.divider()
+
+st.subheader("Detalhes")
+
+audio_path = Path("Popularity_Voice.mp3")
+
+with open(audio_path, "rb") as f:
+    audio_bytes = f.read()
+
+st.audio(audio_bytes, format="audio/mp3")
+
+st.text("Usamos essa dashboard para monitorar a popularidade dos nossos serviços apresentados. Neste cenário, temos 3 painéis/visualizações. Onde a primeira visualização se remete a cursos mais buscados, ajudando o usuário a entender quais são as tendências daquele ano. ")
+st.text("Já as duas visualizações restantes são direcionadas para as instituições parceiras, assim elas entenderão qual é a popularidade da sua instituição e vestibular podendo tomar uma medida caso necessário. ")
+
+st.write("Esses dados são coletados a partir do monitoramento dos **cliques** dos usuários nas páginas e também através da **barra de pesquisa**, eles são diretamente enviados para nosso banco de dados e transformados em um dashboard com um relatório final.")

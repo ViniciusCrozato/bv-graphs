@@ -4,7 +4,7 @@ import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-st.set_page_config(page_title="Dashboard 3 - Projeção de Crescimento", layout="wide")
+st.set_page_config(page_title="Dashboard 3 - Projeção de Crescimento")
 
 # ========= MOCK DATA =========
 np.random.seed(42)
@@ -76,3 +76,7 @@ st.markdown(f"""
   - Acessos esperados: **{int(proj_acessos)}**  
   - Receita esperada: **R$ {int(proj_receita):,}**
 """)
+
+st.divider()
+st.subheader("Detalhes")
+st.text("\nEsta sessão é uma medição de extrema importância para possíveis investidores, já que se trata de uma projeção de crescimento. Aqui, temos três métricas: no eixo X, que se trata do tempo em meses e no eixo Y, que se trata do fluxo de acesso (usuários) e, por fim, uma linha que representa a projeção de renda, que vai acompanhar o crescimento financeiro do projeto considerando o fluxo de acessos por mês.")
