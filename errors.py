@@ -42,7 +42,7 @@ df_erros = pd.DataFrame({
 df_erros["status_label"] = df_erros["status_code"].map(status_codes)
 
 # ========= DASHBOARD =========
-st.title("🚨 Dashboard 2 - Taxa de Erro em Requisições")
+st.title("🚨 Taxa de Erro em Requisições")
 
 tab1, tab2 = st.tabs(["Por Contexto do Erro", "Por Status Code"])
 

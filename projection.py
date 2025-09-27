@@ -39,7 +39,7 @@ proj_acessos = acessos[-1] + delta_acessos
 proj_receita = receita[-1] + delta_receita
 
 # ========= DASHBOARD =========
-st.title("📈 Dashboard 3 - Projeção de Crescimento de Receita e Usuários")
+st.title("📈 Projeção de Crescimento de Receita e Usuários")
 
 fig, ax1 = plt.subplots(figsize=(10, 6))
 

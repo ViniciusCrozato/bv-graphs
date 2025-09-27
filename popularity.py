@@ -4,12 +4,34 @@ import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-st.set_page_config(page_title="Dashboard 1 - Cursos/IES/Vest mais buscados", layout="wide")
+st.set_page_config(page_title="Cursos/IES/Vest mais buscados", layout="wide")
 
 # ========= MOCK DATA =========
 np.random.seed(42)
 
-instituicoes = [f"Instituição {i}" for i in range(1, 21)]
+instituicoes = [
+    "Universidade de São Paulo (USP)",
+    "Universidade Estadual de Campinas (UNICAMP)",
+    "Universidade Estadual Paulista (UNESP)",
+    "Universidade Federal do Rio de Janeiro (UFRJ)",
+    "Universidade Federal de Minas Gerais (UFMG)",
+    "Universidade Federal do Rio Grande do Sul (UFRGS)",
+    "Universidade Federal do Paraná (UFPR)",
+    "Universidade Federal de Santa Catarina (UFSC)",
+    "Universidade Federal de Pernambuco (UFPE)",
+    "Universidade Federal da Bahia (UFBA)",
+    "Universidade Federal de Brasília (UnB)",
+    "Universidade Federal do Ceará (UFC)",
+    "Universidade Federal de Goiás (UFG)",
+    "Universidade Federal do Pará (UFPA)",
+    "Universidade Federal do Rio Grande do Norte (UFRN)",
+    "Universidade Estadual do Ceará (UECE)",
+    "Universidade Estadual do Rio de Janeiro (UERJ)",
+    "Universidade Federal de Uberlândia (UFU)",
+    "Universidade Federal de Juiz de Fora (UFJF)",
+    "Universidade Federal de São Carlos (UFSCar)"
+]
+
 areas = ["Engenharia", "Saúde", "Direito", "Educação", "TI", "Artes", "Administração"]
 cursos = [f"Curso {i}" for i in range(1, 51)]
 vestibulares = ["ENEM", "Fuvest", "Unicamp", "UFMG", "UERJ", "UFBA", "UECE", "UNICENTRO"]
@@ -53,7 +75,7 @@ top_n_ies = st.slider("Quantas instituições exibir:", min_value=5, max_value=2
 top_inst = df_instituicoes.sort_values("buscas", ascending=False).head(top_n_ies)
 
 fig, ax = plt.subplots(figsize=(8, 5))
-sns.barplot(data=top_inst, x="buscas", y="instituicao", palette="viridis", ax=ax)
+sns.barplot(data=top_inst, x="buscas", y="instituicao", palette="viridis", ax=ax, orient="h")
 ax.set_title(f"Top {top_n_ies} Instituições mais buscadas")
 ax.set_xlabel("Quantidade de buscas")
 ax.set_ylabel("Instituição")
@@ -66,7 +88,7 @@ top_n_vest = st.slider("Quantos vestibulares exibir:", min_value=3, max_value=le
 top_vest = df_vestibulares.sort_values("buscas", ascending=False).head(top_n_vest)
 
 fig, ax = plt.subplots(figsize=(8, 5))
-sns.barplot(data=top_vest, x="buscas", y="vestibular", palette="coolwarm", ax=ax)
+sns.barplot(data=top_vest, x="buscas", y="vestibular", palette="coolwarm", ax=ax, orient="h")
 ax.set_title("Vestibulares mais buscados")
 ax.set_xlabel("Quantidade de buscas")
 ax.set_ylabel("Vestibular")

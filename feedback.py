@@ -5,7 +5,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import random
 
-st.set_page_config(page_title="Dashboard 4 - Alinhamento Produto vs Demanda", layout="wide")
+st.set_page_config(page_title="Alinhamento Produto vs Demanda", layout="wide")
 
 # ========= MOCK DATA =========
 np.random.seed(42)

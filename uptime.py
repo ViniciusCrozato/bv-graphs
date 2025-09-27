@@ -5,12 +5,25 @@ from datetime import datetime, timedelta
 
 st.set_page_config(page_title="Uptime e Desempenho", layout="wide")
 
-st.title("🖥️ Dashboard 5 - Uptime e Desempenho de Servidores")
+st.title("🖥️ Uptime e Desempenho de Servidores")
 
 # ================= Parte 1: Status Atual =================
 st.header("1. Status Atual dos Microserviços")
 
 microservicos = [f"Serviço {i}" for i in range(1, 11)]
+microserviços = [
+    "Core API",
+    "Trilhas API",
+    "Web Analytics Hooks",
+    "Data Pipelines Worker",
+    "DB sa-east-1a",
+    "DB sa-east-1b",
+    "Web Core",
+    "Web Trilhas",
+    "Autenticação",
+    "Parceirias
+    ",
+]
 status = ["online"] * 10
 status[3] = "offline"  # um microserviço offline proposital
 
