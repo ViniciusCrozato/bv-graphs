@@ -1,10 +1,10 @@
-
 import streamlit as st
 from pathlib import Path
 import pandas as pd
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
+from matplotlib.colors import LinearSegmentedColormap
 
 st.set_page_config(page_title="Cursos/IES/Vest mais buscados")
 
@@ -76,8 +76,16 @@ top_n_ies = st.slider("Quantas instituições exibir:", min_value=5, max_value=2
 
 top_inst = df_instituicoes.sort_values("buscas", ascending=False).head(top_n_ies)
 
+# 🎨 Cria degradê entre as 3 cores
+custom_colors = ["#FEE182", "#9173E5", "#9173E5"]
+custom_cmap = LinearSegmentedColormap.from_list("custom_gradient", custom_colors, N=256)
+
+# Aplica o degradê proporcional às buscas
+norm = plt.Normalize(top_inst["buscas"].min(), top_inst["buscas"].max())
+colors = [custom_cmap(norm(v)) for v in top_inst["buscas"]]
+
 fig, ax = plt.subplots(figsize=(8, 5))
-sns.barplot(data=top_inst, x="buscas", y="instituicao", palette="viridis", ax=ax, orient="h")
+sns.barplot(data=top_inst, x="buscas", y="instituicao", ax=ax, orient="h", palette=colors)
 ax.set_title(f"Top {top_n_ies} Instituições mais buscadas")
 ax.set_xlabel("Quantidade de buscas")
 ax.set_ylabel("Instituição")
@@ -89,8 +97,12 @@ top_n_vest = st.slider("Quantos vestibulares exibir:", min_value=3, max_value=le
 
 top_vest = df_vestibulares.sort_values("buscas", ascending=False).head(top_n_vest)
 
+# Degradê aplicado também nos vestibulares
+norm_vest = plt.Normalize(top_vest["buscas"].min(), top_vest["buscas"].max())
+colors_vest = [custom_cmap(norm_vest(v)) for v in top_vest["buscas"]]
+
 fig, ax = plt.subplots(figsize=(8, 5))
-sns.barplot(data=top_vest, x="buscas", y="vestibular", palette="coolwarm", ax=ax, orient="h")
+sns.barplot(data=top_vest, x="buscas", y="vestibular", ax=ax, orient="h", palette=colors_vest)
 ax.set_title("Vestibulares mais buscados")
 ax.set_xlabel("Quantidade de buscas")
 ax.set_ylabel("Vestibular")
@@ -109,5 +121,4 @@ st.audio(audio_bytes, format="audio/mp3")
 
 st.text("Usamos essa dashboard para monitorar a popularidade dos nossos serviços apresentados. Neste cenário, temos 3 painéis/visualizações. Onde a primeira visualização se remete a cursos mais buscados, ajudando o usuário a entender quais são as tendências daquele ano. ")
 st.text("Já as duas visualizações restantes são direcionadas para as instituições parceiras, assim elas entenderão qual é a popularidade da sua instituição e vestibular podendo tomar uma medida caso necessário. ")
-
 st.write("Esses dados são coletados a partir do monitoramento dos **cliques** dos usuários nas páginas e também através da **barra de pesquisa**, eles são diretamente enviados para nosso banco de dados e transformados em um dashboard com um relatório final.")

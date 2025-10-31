@@ -4,6 +4,7 @@ import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 import random
+from collections import Counter
 
 st.set_page_config(page_title="Alinhamento Produto vs Demanda")
 
@@ -38,14 +39,22 @@ st.header("1. Simulados de redação vs vestibular")
 col1, col2 = st.columns([2, 1])
 
 with col1:
+    fig, ax = plt.subplots(figsize=(4, 4))
     notas_redacao = np.random.randint(1, 6, size=100)
-    fig, ax = plt.subplots(figsize=(6, 4))
-    sns.histplot(notas_redacao, bins=5, ax=ax, color="skyblue", edgecolor="black")
+    sns.histplot(
+        notas_redacao, 
+        bins=np.arange(1, 7) - 0.5,  # garante bins centrados em 1, 2, 3, 4, 5
+        ax=ax, 
+        color="skyblue", 
+        edgecolor="black"
+    )
     ax.set_title("Alinhamento Redação (1-5)")
     ax.set_xlabel("Nota (1=ruim, 5=excelente)")
     ax.set_ylabel("Quantidade")
+    ax.set_xticks([1, 2, 3, 4, 5])  # exibe apenas as notas inteiras
     st.pyplot(fig)
 
+    
 with col2:
     st.subheader("Feedbacks")
     for r in gerar_respostas(5):
@@ -58,13 +67,27 @@ st.header("2. Matéria com mais dificuldade")
 col1, col2 = st.columns([2, 1])
 
 with col1:
-    materias = ["Matemática", "Português", "História", "Física", "Química", "Biologia", "Geografia"]
-    dificuldades = np.random.choice(materias, size=100, p=[0.25,0.2,0.1,0.15,0.1,0.1,0.1])
+    materias = ["MAT", "PORT", "HIS", "FIS", "QUIM", "BIO", "GEO"]
+    dificuldades = np.random.choice(materias, size=100, p=[0.25, 0.2, 0.1, 0.15, 0.1, 0.1, 0.1])
+
+    
+    contagem = Counter(dificuldades)
+    materias_ordenadas = [m for m, _ in contagem.most_common()]  
+
+    
     fig, ax = plt.subplots(figsize=(6, 4))
-    sns.histplot(dificuldades, ax=ax, color="salmon", edgecolor="black")
+    sns.countplot(
+        x=dificuldades,
+        order=materias_ordenadas,
+        ax=ax,
+        color="salmon",
+        edgecolor="black"
+    )
     ax.set_title("Matérias mais difíceis")
     ax.set_xlabel("Matéria")
     ax.set_ylabel("Quantidade")
+
+    
     st.pyplot(fig)
 
 with col2:
@@ -99,7 +122,7 @@ respostas_nota = np.random.choice(["Sim", "Não"], size=100, p=[0.6, 0.4])
 contagem_nota = pd.Series(respostas_nota).value_counts()
 
 fig, ax = plt.subplots(figsize=(5, 5))
-ax.pie(contagem_nota, labels=contagem_nota.index, autopct="%1.1f%%", startangle=90, colors=["#4CAF50", "#F44336"])
+ax.pie(contagem_nota, labels=contagem_nota.index, autopct="%1.1f%%", startangle=90, colors=[ "#F44336","#4CAF50"])
 ax.set_title("Nota suficiente?")
 st.pyplot(fig)
 

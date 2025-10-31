@@ -9,7 +9,7 @@ st.set_page_config(page_title="Dashboard 3 - Projeção de Crescimento")
 # ========= MOCK DATA =========
 np.random.seed(42)
 
-meses = pd.date_range("2024-01-01", periods=12, freq="M").strftime("%b/%Y")
+meses = pd.date_range("2025-06-01", periods=12, freq="M").strftime("%b/%Y")
 
 # Acessos: tendência de alta mas com quedas
 acessos = [1000]
@@ -42,6 +42,11 @@ proj_receita = receita[-1] + delta_receita
 st.title("📈 Projeção de Crescimento de Receita e Usuários")
 
 fig, ax1 = plt.subplots(figsize=(10, 6))
+
+split_index = len(df) - 6  # Adjust this based on where your projection starts
+
+ax1.axvspan(0, split_index, alpha=0.05, color='blue', label='Atual')
+ax1.axvspan(split_index, len(df)-1, alpha=0.15, color='purple', label='Projeção')
 
 # --- Linha de acessos (Eixo da esquerda) ---
 color_acessos = "tab:blue"
