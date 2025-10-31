@@ -135,7 +135,7 @@ fig, ax = plt.subplots(figsize=(6, 4))
 sns.histplot(indicacao, bins=np.arange(1,12) - 0.5, ax=ax, color="purple", edgecolor="black")
 ax.set_title("Chance de recomendar (1-10)")
 ax.set_xlabel("Nota")
-ax.set_ylabel("Quantidade")
+ax.set_ylabel("Quantidade") 
 ax.set_xticks([1,2,3,4,5,6,7,8,9,10])
 st.pyplot(fig)
 
