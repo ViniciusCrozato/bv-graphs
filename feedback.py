@@ -43,7 +43,7 @@ with col1:
     notas_redacao = np.random.randint(1, 6, size=100)
     sns.histplot(
         notas_redacao, 
-        bins=np.arange(1, 7) - 0.5,  # garante bins centrados em 1, 2, 3, 4, 5
+        bins=np.arange(1, 7) - 0.5,  
         ax=ax, 
         color="skyblue", 
         edgecolor="black"
@@ -51,7 +51,7 @@ with col1:
     ax.set_title("Alinhamento Redação (1-5)")
     ax.set_xlabel("Nota (1=ruim, 5=excelente)")
     ax.set_ylabel("Quantidade")
-    ax.set_xticks([1, 2, 3, 4, 5])  # exibe apenas as notas inteiras
+    ax.set_xticks([1, 2, 3, 4, 5])  
     st.pyplot(fig)
 
     
@@ -132,10 +132,11 @@ st.header("5. Chance de recomendar (NPS-like)")
 indicacao = np.random.randint(1, 11, size=100)
 
 fig, ax = plt.subplots(figsize=(6, 4))
-sns.histplot(indicacao, bins=10, ax=ax, color="purple", edgecolor="black")
+sns.histplot(indicacao, bins=np.arange(1,12) - 0.5, ax=ax, color="purple", edgecolor="black")
 ax.set_title("Chance de recomendar (1-10)")
 ax.set_xlabel("Nota")
 ax.set_ylabel("Quantidade")
+ax.set_xticks([1,2,3,4,5,6,7,8,9,10])
 st.pyplot(fig)
 
 st.divider()
